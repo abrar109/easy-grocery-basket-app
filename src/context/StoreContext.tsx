@@ -23,12 +23,15 @@ interface StoreContextType {
   cartTotal: number;
   cartCount: number;
   filteredProducts: Product[];
+  updateProduct: (product: Product) => void;
+  isEditMode: boolean;
+  toggleEditMode: () => void;
 }
 
 const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [products] = useState<Product[]>(groceryData);
+  const [products, setProducts] = useState<Product[]>(groceryData);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -36,6 +39,7 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [cartCount, setCartCount] = useState(0);
   const [categories, setCategories] = useState<string[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
+  const [isEditMode, setIsEditMode] = useState(false);
 
   // Extract categories from products
   useEffect(() => {
@@ -116,6 +120,27 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setCartItems([]);
   };
 
+  const updateProduct = (updatedProduct: Product) => {
+    setProducts(prevProducts => 
+      prevProducts.map(product => 
+        product.id === updatedProduct.id ? updatedProduct : product
+      )
+    );
+    
+    // Also update product in cart if it exists there
+    setCartItems(prevItems => 
+      prevItems.map(item => 
+        item.product.id === updatedProduct.id 
+          ? { ...item, product: updatedProduct } 
+          : item
+      )
+    );
+  };
+
+  const toggleEditMode = () => {
+    setIsEditMode(!isEditMode);
+  };
+
   return (
     <StoreContext.Provider
       value={{
@@ -133,6 +158,9 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         cartTotal,
         cartCount,
         filteredProducts,
+        updateProduct,
+        isEditMode,
+        toggleEditMode,
       }}
     >
       {children}

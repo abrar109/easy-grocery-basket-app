@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { StoreProvider } from '@/context/StoreContext';
-import Header from '@/components/Header';
+import HeaderWrapper from '@/components/HeaderWrapper';
 import Categories from '@/components/Categories';
 import ProductGrid from '@/components/ProductGrid';
 import Cart from '@/components/Cart';
@@ -36,7 +36,7 @@ const Index = () => {
   return (
     <StoreProvider>
       <div className="min-h-screen flex flex-col bg-background">
-        <Header toggleCart={toggleCart} />
+        <HeaderWrapper toggleCart={toggleCart} />
         
         <main className="flex-1">
           <Categories />
