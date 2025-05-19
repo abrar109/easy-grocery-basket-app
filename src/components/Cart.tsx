@@ -62,7 +62,7 @@ const Cart = ({ open, onClose, onCheckout }: CartProps) => {
                   <div className="ml-4 flex flex-1 flex-col">
                     <div className="flex justify-between text-base font-medium">
                       <h3 className="line-clamp-2">{item.product.name}</h3>
-                      <p className="ml-4">${(item.product.price * item.quantity).toFixed(2)}</p>
+                      <p className="ml-4">₹{(item.product.price * item.quantity).toFixed(2)}</p>
                     </div>
                     <p className="mt-1 text-sm text-muted-foreground">{item.product.unit}</p>
                     <div className="flex items-center justify-between mt-2">
@@ -102,7 +102,7 @@ const Cart = ({ open, onClose, onCheckout }: CartProps) => {
             <div className="border-t p-6 space-y-4">
               <div className="flex justify-between text-base font-medium">
                 <p>Subtotal</p>
-                <p>${cartTotal.toFixed(2)}</p>
+                <p>₹{cartTotal.toFixed(2)}</p>
               </div>
               <div className="flex justify-between text-base font-medium">
                 <p>Shipping</p>
@@ -111,7 +111,7 @@ const Cart = ({ open, onClose, onCheckout }: CartProps) => {
               <Separator />
               <div className="flex justify-between text-lg font-semibold">
                 <p>Total</p>
-                <p>${cartTotal.toFixed(2)}</p>
+                <p>₹{cartTotal.toFixed(2)}</p>
               </div>
               <div className="mt-6 space-y-3">
                 <Button 

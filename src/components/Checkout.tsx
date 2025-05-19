@@ -6,6 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/componen
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { IndianRupee } from 'lucide-react';
 
 interface CheckoutProps {
   onClose: () => void;
@@ -145,7 +146,7 @@ const Checkout = ({ onClose, onSuccess }: CheckoutProps) => {
             <div className="border-t pt-4 mt-4">
               <div className="flex justify-between mb-1">
                 <span>Subtotal</span>
-                <span>${cartTotal.toFixed(2)}</span>
+                <span className="flex items-center"><IndianRupee className="h-3 w-3 mr-1" />{cartTotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between mb-1">
                 <span>Shipping</span>
@@ -153,7 +154,7 @@ const Checkout = ({ onClose, onSuccess }: CheckoutProps) => {
               </div>
               <div className="flex justify-between font-semibold">
                 <span>Total</span>
-                <span>${cartTotal.toFixed(2)}</span>
+                <span className="flex items-center"><IndianRupee className="h-4 w-4 mr-1" />{cartTotal.toFixed(2)}</span>
               </div>
             </div>
           </CardContent>
@@ -173,7 +174,11 @@ const Checkout = ({ onClose, onSuccess }: CheckoutProps) => {
               className="flex-1 bg-grocery-green hover:bg-grocery-darkGreen"
               disabled={isProcessing}
             >
-              {isProcessing ? "Processing..." : `Pay $${cartTotal.toFixed(2)}`}
+              {isProcessing ? "Processing..." : (
+                <span className="flex items-center">
+                  Pay <IndianRupee className="h-4 w-4 mx-1" />{cartTotal.toFixed(2)}
+                </span>
+              )}
             </Button>
           </CardFooter>
         </form>
