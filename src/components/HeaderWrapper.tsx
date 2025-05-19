@@ -5,7 +5,7 @@ import EditModeToggle from '@/components/EditModeToggle';
 import Login from '@/components/Login';
 import { useStore } from '@/context/StoreContext';
 import { Button } from '@/components/ui/button';
-import { LogIn } from 'lucide-react';
+import { LogIn, IndianRupee } from 'lucide-react';
 
 interface HeaderWrapperProps {
   toggleCart: () => void;
@@ -29,6 +29,10 @@ const HeaderWrapper = ({ toggleCart }: HeaderWrapperProps) => {
           <span className="hidden sm:inline">Login</span>
         </Button>
         <EditModeToggle />
+      </div>
+      
+      <div className="absolute top-4 left-4 text-xs bg-grocery-green text-white px-2 py-1 rounded-full">
+        ₹ Updated
       </div>
       
       <Login 
